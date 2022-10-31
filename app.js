@@ -10,8 +10,8 @@
 
 var taskInput = document.getElementById("new-task"); //Add a new task.
 var addButton = document.getElementsByTagName("button")[0]; //first button
-var incompleteTaskHolder = document.getElementById("incompleteTasks"); //ul of #incompleteTasks
-var completedTasksHolder = document.getElementById("completed-tasks"); //completed-tasks
+var incompleteTaskHolder = document.getElementById("main__incomplete"); //ul of #main__incomplete
+var completedTasksHolder = document.getElementById("main__complete"); //main__complete
 
 
 //New task list item
@@ -36,11 +36,22 @@ var createNewTaskElement = function (taskString) {
 
   label.innerText = taskString;
   label.className = "task";
+  label.classList.add("main__label");
+  label.classList.add("label");
+
+  deleteButtonImg.className = "button_img";
 
   //Each elements, needs appending
   checkBox.type = "checkbox";
+  checkBox.className = "main__input";
+  checkBox.classList.add("input");
+  checkBox.classList.add("input__checkbox");
+
   editInput.type = "text";
   editInput.className = "task";
+  editInput.classList.add("main__input");
+  editInput.classList.add("input");
+  editInput.classList.add("input_text");
 
   editButton.innerText = "Edit"; //innerText encodes special characters, HTML does not.
   editButton.className = "button_edit";
@@ -124,7 +135,7 @@ var deleteTask = function () {
 var taskCompleted = function () {
   console.log("Complete Task...");
 
-  //Append the task list item to the #completed-tasks
+  //Append the task list item to the #main__complete
   var listItem = this.parentNode;
   completedTasksHolder.appendChild(listItem);
   bindTaskEvents(listItem, taskIncomplete);
@@ -136,7 +147,7 @@ var taskIncomplete = function () {
   console.log("Incomplete Task...");
   //Mark task as incomplete.
   //When the checkbox is unchecked
-  //Append the task list item to the #incompleteTasks.
+  //Append the task list item to the #main__incomplete.
   var listItem = this.parentNode;
   incompleteTaskHolder.appendChild(listItem);
   bindTaskEvents(listItem, taskCompleted);
